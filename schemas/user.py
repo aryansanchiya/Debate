@@ -31,6 +31,25 @@ class UserRegister(BaseModel):
     bio: Optional[str] = None
 
 
+class UserUpdate(BaseModel):
+    username: Optional[str] = Field(
+        default=None,
+        min_length=3,
+        max_length=30
+    )
+    email: Optional[EmailStr] = None
+    password: Optional[str] = Field(
+        default=None,
+        min_length=6
+    )
+    interest: Optional[str] = None
+    birth_date: Optional[date] = None
+    preference: Optional[Preference] = None
+    bio: Optional[str] = None
+
+
+
+
 class UserResponse(BaseModel):
     id: int
     username: str
@@ -52,3 +71,8 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class DeleteResponse(BaseModel):
+    message: str
+    user_id: int
+    username: str
